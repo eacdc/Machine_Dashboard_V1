@@ -139,6 +139,16 @@
         return new Intl.NumberFormat().format(num);
     }
 
+    function setStatusDisplay(element, label, color) {
+        if (!element) return;
+        const normalizedColor = color === 'green' ? 'green' : 'red';
+        element.innerHTML = `
+            <span class="status-indicator ${normalizedColor}"></span>
+            <span>${label}</span>
+        `;
+        element.style.color = normalizedColor === 'green' ? '#047857' : '#b91c1c';
+    }
+
     function clearIdleTimer() {
         if (idleTimerInterval) {
             clearInterval(idleTimerInterval);
@@ -192,8 +202,7 @@
             selectors.machineCard.dataset.state = 'idle';
         }
 
-        selectors.idleStatusText.textContent = 'IDLE';
-        selectors.idleStatusText.style.color = '#b91c1c';
+        setStatusDisplay(selectors.idleStatusText, 'IDLE', 'red');
         selectors.lastJobCompleted.textContent = data.LastCompletedAt
             ? formatDateTime(data.LastCompletedAt)
             : '—';
@@ -227,8 +236,11 @@
         selectors.targetFinishIn.textContent = minutesToHrsMinutes(data.TargetMinutesToFinish);
         selectors.eta.textContent = formatDateTime(data.TargetFinishAt);
 
-        selectors.runningStatusText.textContent = isBehind ? 'Running behind schedule' : 'On track';
-        selectors.runningStatusText.style.color = isBehind ? '#b91c1c' : '#047857';
+        setStatusDisplay(
+            selectors.runningStatusText,
+            isBehind ? 'Running behind schedule' : 'On track',
+            isBehind ? 'red' : 'green'
+        );
 
         const producedDisplay = formatNumber(data.ProducedQty);
         const planDisplay = formatNumber(data.PlanQty);
