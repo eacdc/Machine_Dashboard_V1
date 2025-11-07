@@ -90,7 +90,10 @@
 
     function updateVisibility({ showDashboard = false, showPlaceholder = false } = {}) {
         selectors.dashboard.hidden = !showDashboard;
+        selectors.dashboard.style.display = showDashboard ? '' : 'none';
+
         selectors.noMachineSelected.hidden = !showPlaceholder;
+        selectors.noMachineSelected.style.display = showPlaceholder ? '' : 'none';
     }
 
     function coerceNumber(value) {
@@ -312,14 +315,14 @@
             const data = await fetchMachineData(state.machineId, state.database);
             renderDashboard(data);
             setStatusMessage('');
-            updateVisibility({ showDashboard: true });
+            updateVisibility({ showDashboard: true, showPlaceholder: false });
             if (selectors.autoRefreshToggle.checked) {
                 startAutoRefresh();
             }
         } catch (error) {
             console.error('Failed to load machine data', error);
             setStatusMessage(error.message || 'Failed to load machine data.', 'error');
-            updateVisibility({ showDashboard: false });
+            updateVisibility({ showDashboard: false, showPlaceholder: false });
         }
     }
 
