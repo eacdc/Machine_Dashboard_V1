@@ -88,14 +88,9 @@
         selectors.statusMessage.hidden = !message;
     }
 
-    function showDashboard(show) {
-        selectors.dashboard.hidden = !show;
-        selectors.noMachineSelected.hidden = show;
-    }
-
-    function showNoMachineMessage(show) {
-        selectors.noMachineSelected.hidden = !show;
-        selectors.dashboard.hidden = show;
+    function updateVisibility({ showDashboard = false, showPlaceholder = false } = {}) {
+        selectors.dashboard.hidden = !showDashboard;
+        selectors.noMachineSelected.hidden = !showPlaceholder;
     }
 
     function coerceNumber(value) {
@@ -291,29 +286,28 @@
         if (!Number.isInteger(parsedMachineId) || parsedMachineId <= 0) {
             stopAutoRefresh();
             setStatusMessage('');
-            showNoMachineMessage(true);
+            selectors.machineIdInput.value = '';
+            updateVisibility({ showPlaceholder: true });
             return;
         }
 
         state.machineId = parsedMachineId;
 
         setStatusMessage('Loading machine data…');
-        showNoMachineMessage(false);
-        showDashboard(false);
+        updateVisibility({ showPlaceholder: false, showDashboard: false });
 
         try {
             const data = await fetchMachineData(state.machineId, state.database);
             renderDashboard(data);
             setStatusMessage('');
-            showDashboard(true);
+            updateVisibility({ showDashboard: true });
             if (selectors.autoRefreshToggle.checked) {
                 startAutoRefresh();
             }
         } catch (error) {
             console.error('Failed to load machine data', error);
             setStatusMessage(error.message || 'Failed to load machine data.', 'error');
-            showDashboard(false);
-            showNoMachineMessage(false);
+            updateVisibility({ showDashboard: false });
         }
     }
 
@@ -381,7 +375,7 @@
         if (state.machineIdFromUrl && Number.isInteger(state.machineId) && state.machineId > 0) {
             loadData();
         } else {
-            showNoMachineMessage(true);
+            updateVisibility({ showPlaceholder: true });
         }
     }
 
