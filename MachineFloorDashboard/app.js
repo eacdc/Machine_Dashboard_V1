@@ -235,11 +235,12 @@
         selectors.runningStatusText.textContent = isBehind ? 'Running behind schedule' : 'On track';
         selectors.runningStatusText.style.color = isBehind ? '#b91c1c' : '#047857';
 
-        const produced = coerceNumber(data.ProducedQty) || 0;
-        const plan = coerceNumber(data.PlanQty) || 0;
-        const remaining = coerceNumber(data.RemainingQty) || 0;
-        selectors.progressText.textContent = `Produced ${formatNumber(produced)} / ${formatNumber(plan)}`;
-        selectors.remainingText.textContent = `Remaining ${formatNumber(remaining)}`;
+        const producedDisplay = formatNumber(data.ProducedQty);
+        const planDisplay = formatNumber(data.PlanQty);
+        const remainingDisplay = formatNumber(data.RemainingQty);
+
+        selectors.progressText.textContent = `Produced ${producedDisplay} / ${planDisplay}`;
+        selectors.remainingText.textContent = `Remaining ${remainingDisplay}`;
     }
 
     function renderDashboard(data) {
