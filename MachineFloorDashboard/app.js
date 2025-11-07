@@ -6,6 +6,7 @@
         noMachineSelected: document.getElementById('noMachineSelected'),
         statusMessage: document.getElementById('statusMessage'),
         machineHeader: document.getElementById('machineHeader'),
+        machineCard: document.getElementById('machineCard'),
         machineName: document.getElementById('machineName'),
         idleLayout: document.getElementById('idleLayout'),
         runningLayout: document.getElementById('runningLayout'),
@@ -156,11 +157,16 @@
 
     function renderIdleState(data) {
         selectors.idleLayout.hidden = false;
+        selectors.idleLayout.style.display = '';
         selectors.runningLayout.hidden = true;
+        selectors.runningLayout.style.display = 'none';
         clearIdleTimer();
 
         if (selectors.machineHeader) {
             selectors.machineHeader.hidden = false;
+        }
+        if (selectors.machineCard) {
+            selectors.machineCard.dataset.state = 'idle';
         }
 
         selectors.idleStatusText.textContent = 'IDLE';
@@ -177,12 +183,17 @@
 
     function renderRunningState(data) {
         selectors.idleLayout.hidden = true;
+        selectors.idleLayout.style.display = 'none';
         selectors.runningLayout.hidden = false;
+        selectors.runningLayout.style.display = '';
         clearIdleTimer();
 
         const isBehind = Boolean(data.IsBehindSchedule);
         if (selectors.machineHeader) {
             selectors.machineHeader.hidden = true;
+        }
+        if (selectors.machineCard) {
+            selectors.machineCard.dataset.state = 'running';
         }
 
         const jobNumber = data.CurrentJobNumber ?? 'Unknown';
