@@ -98,9 +98,24 @@
         selectors.dashboard.hidden = show;
     }
 
+    function coerceNumber(value) {
+        if (value === null || value === undefined) return NaN;
+        if (typeof value === 'number') {
+            return value;
+        }
+        if (typeof value === 'string') {
+            const cleaned = value.replace(/[^0-9.-]/g, '');
+            if (cleaned.length === 0 || cleaned === '-' || cleaned === '.') {
+                return NaN;
+            }
+            const parsed = Number(cleaned);
+            return Number.isFinite(parsed) ? parsed : NaN;
+        }
+        return NaN;
+    }
+
     function minutesToHrsMinutes(value) {
-        if (value === null || value === undefined) return '—';
-        const minutes = Number(value);
+        const minutes = coerceNumber(value);
         if (!Number.isFinite(minutes)) return '—';
         const isNegative = minutes < 0;
         const absMinutes = Math.abs(Math.round(minutes));
@@ -124,7 +139,7 @@
 
     function formatNumber(value) {
         if (value === null || value === undefined) return '—';
-        const num = Number(value);
+        const num = coerceNumber(value);
         if (!Number.isFinite(num)) return String(value);
         return new Intl.NumberFormat().format(num);
     }
@@ -139,15 +154,12 @@
 
     function startIdleTimer(initialMinutes) {
         clearIdleTimer();
-        if (initialMinutes === null || initialMinutes === undefined) {
+        const parsedMinutes = coerceNumber(initialMinutes);
+        if (!Number.isFinite(parsedMinutes)) {
             selectors.idleDuration.textContent = '—';
             return;
         }
-        idleTimerMinutes = Number(initialMinutes);
-        if (!Number.isFinite(idleTimerMinutes)) {
-            selectors.idleDuration.textContent = '—';
-            return;
-        }
+        idleTimerMinutes = parsedMinutes;
         selectors.idleDuration.textContent = minutesToHrsMinutes(idleTimerMinutes);
         idleTimerInterval = setInterval(() => {
             idleTimerMinutes += 1;
@@ -223,9 +235,9 @@
         selectors.runningStatusText.textContent = isBehind ? 'Running behind schedule' : 'On track';
         selectors.runningStatusText.style.color = isBehind ? '#b91c1c' : '#047857';
 
-        const produced = Number(data.ProducedQty) || 0;
-        const plan = Number(data.PlanQty) || 0;
-        const remaining = Number(data.RemainingQty) || 0;
+        const produced = coerceNumber(data.ProducedQty) || 0;
+        const plan = coerceNumber(data.PlanQty) || 0;
+        const remaining = coerceNumber(data.RemainingQty) || 0;
         selectors.progressText.textContent = `Produced ${formatNumber(produced)} / ${formatNumber(plan)}`;
         selectors.remainingText.textContent = `Remaining ${formatNumber(remaining)}`;
     }
