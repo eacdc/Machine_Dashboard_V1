@@ -132,10 +132,16 @@
         if (Number.isNaN(date.getTime())) {
             return value;
         }
+        
+        // Adjust for IST timezone offset (UTC+5:30)
+        // Database returns times in IST, but JavaScript may be applying timezone conversion
+        // Subtract 5 hours 30 minutes (330 minutes) to get the correct IST time
+        const adjustedDate = new Date(date.getTime() - (5 * 60 + 30) * 60 * 1000);
+        
         return new Intl.DateTimeFormat(undefined, {
             dateStyle: 'medium',
             timeStyle: 'short'
-        }).format(date);
+        }).format(adjustedDate);
     }
 
     function formatNumber(value) {
