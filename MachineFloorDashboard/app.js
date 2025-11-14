@@ -393,10 +393,24 @@
     function startAutoRefresh() {
         stopAutoRefresh();
         const seconds = Number(config.refreshIntervalSeconds) || 60;
-        if (!Number.isInteger(state.machineId) || state.machineId <= 0) {
+        
+        // Check if we have a valid machine ID from input or state
+        const inputMachineId = selectors.machineIdInput ? selectors.machineIdInput.value.trim() : '';
+        const parsedMachineId = Number(inputMachineId);
+        const currentMachineId = Number.isInteger(parsedMachineId) && parsedMachineId > 0 
+            ? parsedMachineId 
+            : (Number.isInteger(state.machineId) && state.machineId > 0 ? state.machineId : null);
+        
+        if (!currentMachineId) {
+            console.log('[AutoRefresh] No valid machine ID, skipping auto refresh');
             return;
         }
-        autoRefreshInterval = setInterval(loadData, seconds * 1000);
+        
+        console.log(`[AutoRefresh] Starting auto refresh every ${seconds} seconds for machine ${currentMachineId}`);
+        autoRefreshInterval = setInterval(() => {
+            console.log('[AutoRefresh] Auto refreshing...');
+            loadData();
+        }, seconds * 1000);
     }
 
     function stopAutoRefresh() {
