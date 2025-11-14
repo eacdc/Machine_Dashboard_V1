@@ -173,9 +173,60 @@ body {
 .card-header {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
     gap: 1rem;
     margin-bottom: 1rem;
+    position: relative;
+}
+
+.maximize-button {
+    background: transparent;
+    border: 1px solid rgba(15, 23, 42, 0.2);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: rgba(15, 23, 42, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.maximize-button:hover {
+    background: rgba(15, 23, 42, 0.1);
+    border-color: rgba(15, 23, 42, 0.3);
+    color: rgba(15, 23, 42, 0.9);
+}
+
+.maximize-button svg {
+    display: block;
+}
+
+.card.maximized {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    margin: 0;
+    border-radius: 0;
+    z-index: 9999;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.card.maximized .card-content {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.app-shell.hide-header .app-header {
+    display: none;
 }
 
 .card-header h2 {
