@@ -354,7 +354,9 @@ body:has(.card.maximized) {
 .card[data-status-color="red"] .muted,
 .card[data-status-color="red"] .status-text,
 .card[data-status-color="red"] .field-item,
-.card[data-status-color="red"] .field-item p {
+.card[data-status-color="red"] .field-item p,
+.card[data-status-color="red"] .idle-field-item,
+.card[data-status-color="red"] .idle-field-item p {
     color: white;
 }
 
@@ -370,17 +372,21 @@ body:has(.card.maximized) {
 .card[data-status-color="green"] .muted,
 .card[data-status-color="green"] .status-text,
 .card[data-status-color="green"] .field-item,
-.card[data-status-color="green"] .field-item p {
+.card[data-status-color="green"] .field-item p,
+.card[data-status-color="green"] .idle-field-item,
+.card[data-status-color="green"] .idle-field-item p {
     color: #0f172a;
 }
 
 .card[data-status-color="red"] .info-grid h3,
-.card[data-status-color="red"] .field-item h3 {
+.card[data-status-color="red"] .field-item h3,
+.card[data-status-color="red"] .idle-field-item h3 {
     color: rgba(255, 255, 255, 0.8);
 }
 
 .card[data-status-color="green"] .info-grid h3,
-.card[data-status-color="green"] .field-item h3 {
+.card[data-status-color="green"] .field-item h3,
+.card[data-status-color="green"] .idle-field-item h3 {
     color: rgba(15, 23, 42, 0.6);
 }
 
@@ -396,6 +402,16 @@ body:has(.card.maximized) {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+}
+
+#idleLayout.card-content {
+    gap: 2rem;
+    padding: 1.5rem 0;
+}
+
+.card.maximized #idleLayout.card-content {
+    gap: 2.5rem;
+    padding: 2rem 0;
 }
 
 .running-row {
@@ -495,6 +511,70 @@ body:has(.card.maximized) {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1.25rem;
+}
+
+.idle-row {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.idle-row.idle-row-1 {
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    padding: 0 2rem;
+}
+
+.idle-row.idle-row-2 {
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+.idle-field-item {
+    text-align: center;
+    min-width: 300px;
+}
+
+.idle-field-item h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(15, 23, 42, 0.6);
+}
+
+.idle-field-item p {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.card.maximized .idle-row {
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.card.maximized .idle-row.idle-row-1 {
+    gap: 12rem;
+    padding: 0 4rem;
+}
+
+.card.maximized .idle-field-item {
+    min-width: 450px;
+}
+
+.card.maximized .idle-field-item h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+}
+
+.card.maximized .idle-field-item p {
+    font-size: 1.9rem;
+    font-weight: 700;
+}
+
+.card.maximized .idle-field-item .status-text {
+    font-size: 1.9rem;
 }
 
 .info-grid h3 {
