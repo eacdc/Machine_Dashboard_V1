@@ -377,7 +377,7 @@ body {
 .running-row.row-2,
 .running-row.row-3 {
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 6rem;
 }
 
 .running-row.row-4,
@@ -388,6 +388,7 @@ body {
 
 .field-item {
     text-align: center;
+    min-width: 300px;
 }
 
 .field-item h3 {
@@ -406,7 +407,15 @@ body {
 
 .progress-field {
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
+}
+
+.card.maximized .field-item {
+    min-width: 400px;
+}
+
+.card.maximized .progress-field {
+    max-width: 1000px;
 }
 
 .card.maximized .running-row {
@@ -416,7 +425,7 @@ body {
 
 .card.maximized .running-row.row-2,
 .card.maximized .running-row.row-3 {
-    gap: 4rem;
+    gap: 8rem;
 }
 
 .card.maximized .field-item h3 {
