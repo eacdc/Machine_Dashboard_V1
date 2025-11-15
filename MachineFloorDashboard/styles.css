@@ -260,16 +260,18 @@ body {
     margin: 0;
     border-radius: 0;
     z-index: 9999;
-    padding: 3rem 2rem 1.5rem 2rem;
+    padding: 4rem 2rem 2rem 2rem;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    transform: scale(0.9);
+    transform-origin: top center;
 }
 
 .card.maximized .card-content {
     max-width: 1600px;
     margin: 0 auto;
-    padding: 0.5rem 0;
+    padding: 1.5rem 0;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -286,7 +288,7 @@ body {
 
 .card.maximized .card-header {
     margin-top: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
 }
 
 .card-header h2 {
@@ -302,7 +304,7 @@ body {
 }
 
 .card.maximized .machine-name-centered {
-    font-size: 2.5rem;
+    font-size: 3rem;
 }
 
 .card[data-status-color="red"] .card-header h2,
@@ -408,35 +410,35 @@ body {
 }
 
 .card.maximized .running-row {
-    gap: 2rem;
-    margin-bottom: 1.5rem;
+    gap: 2.5rem;
+    margin-bottom: 2rem;
 }
 
 .card.maximized .running-row.row-2,
 .card.maximized .running-row.row-3 {
-    gap: 3rem;
+    gap: 4rem;
 }
 
 .card.maximized .field-item h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
 }
 
 .card.maximized .field-item p {
-    font-size: 1.4rem;
+    font-size: 1.75rem;
     font-weight: 700;
 }
 
 .card.maximized .progress-field h3 {
-    font-size: 1.2rem;
-}
-
-.card.maximized .progress-field p {
     font-size: 1.5rem;
 }
 
+.card.maximized .progress-field p {
+    font-size: 1.9rem;
+}
+
 .card.maximized .status-text {
-    font-size: 1.4rem;
+    font-size: 1.75rem;
 }
 
 .layout {
