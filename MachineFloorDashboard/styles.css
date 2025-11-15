@@ -31,6 +31,27 @@ body {
     display: flex;
 }
 
+body:has(.card.maximized[data-status-color="red"]),
+html:has(.card.maximized[data-status-color="red"]) {
+    background: #b91c1c !important;
+}
+
+body:has(.card.maximized[data-status-color="green"]),
+html:has(.card.maximized[data-status-color="green"]) {
+    background: #22c55e !important;
+}
+
+.card.maximized::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background: inherit;
+}
+
 .app-shell {
     width: min(1100px, 95vw);
     margin: auto;
@@ -261,11 +282,25 @@ body {
     border-radius: 0;
     z-index: 9999;
     padding: 3.5rem 1rem 1.5rem 1rem;
-    overflow-y: auto;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     transform: scale(0.88);
     transform-origin: top center;
+    box-sizing: border-box;
+}
+
+body:has(.card.maximized) {
+    overflow: hidden;
+    background: #0f172a;
+}
+
+.card.maximized[data-status-color="red"] {
+    background: #b91c1c !important;
+}
+
+.card.maximized[data-status-color="green"] {
+    background: #22c55e !important;
 }
 
 .card.maximized .card-content {
