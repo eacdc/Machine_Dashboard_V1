@@ -174,31 +174,11 @@ body {
 .card[data-status-color="red"] {
     background: #b91c1c;
     color: white;
-    animation: blink-red 1.5s ease-in-out infinite;
 }
 
 .card[data-status-color="green"] {
     background: #22c55e;
     color: #0f172a;
-    animation: blink-green 1.5s ease-in-out infinite;
-}
-
-@keyframes blink-red {
-    0%, 100% {
-        background-color: #b91c1c;
-    }
-    50% {
-        background-color: #dc2626;
-    }
-}
-
-@keyframes blink-green {
-    0%, 100% {
-        background-color: #22c55e;
-    }
-    50% {
-        background-color: #16a34a;
-    }
 }
 
 .card-header {
@@ -208,6 +188,19 @@ body {
     gap: 1rem;
     margin-bottom: 1rem;
     position: relative;
+}
+
+.card-header .machine-name-centered {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.card-header .maximize-button {
+    position: absolute;
+    right: 0;
+    z-index: 2;
 }
 
 .maximize-button {
@@ -274,17 +267,33 @@ body {
 }
 
 .card.maximized .card-content {
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
+    padding: 2rem 0;
 }
 
 .app-shell.hide-header .app-header {
     display: none;
 }
 
+.card-header {
+    position: relative;
+}
+
 .card-header h2 {
     margin: 0;
     font-size: 1.4rem;
+}
+
+.machine-name-centered {
+    text-align: center;
+    width: 100%;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.card.maximized .machine-name-centered {
+    font-size: 3.5rem;
 }
 
 .card[data-status-color="red"] .card-header h2,
@@ -297,7 +306,9 @@ body {
 .card[data-status-color="red"] .progress,
 .card[data-status-color="red"] .progress-text,
 .card[data-status-color="red"] .muted,
-.card[data-status-color="red"] .status-text {
+.card[data-status-color="red"] .status-text,
+.card[data-status-color="red"] .field-item,
+.card[data-status-color="red"] .field-item p {
     color: white;
 }
 
@@ -311,15 +322,19 @@ body {
 .card[data-status-color="green"] .progress,
 .card[data-status-color="green"] .progress-text,
 .card[data-status-color="green"] .muted,
-.card[data-status-color="green"] .status-text {
+.card[data-status-color="green"] .status-text,
+.card[data-status-color="green"] .field-item,
+.card[data-status-color="green"] .field-item p {
     color: #0f172a;
 }
 
-.card[data-status-color="red"] .info-grid h3 {
+.card[data-status-color="red"] .info-grid h3,
+.card[data-status-color="red"] .field-item h3 {
     color: rgba(255, 255, 255, 0.8);
 }
 
-.card[data-status-color="green"] .info-grid h3 {
+.card[data-status-color="green"] .info-grid h3,
+.card[data-status-color="green"] .field-item h3 {
     color: rgba(15, 23, 42, 0.6);
 }
 
@@ -335,6 +350,84 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+}
+
+.running-row {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.running-row.row-1 {
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+.running-row.row-2,
+.running-row.row-3 {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.running-row.row-4,
+.running-row.row-5 {
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+.field-item {
+    text-align: center;
+}
+
+.field-item h3 {
+    margin: 0 0 0.5rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(15, 23, 42, 0.6);
+}
+
+.field-item p {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.progress-field {
+    width: 100%;
+    max-width: 600px;
+}
+
+.card.maximized .running-row {
+    gap: 3rem;
+    margin-bottom: 2.5rem;
+}
+
+.card.maximized .running-row.row-2,
+.card.maximized .running-row.row-3 {
+    gap: 5rem;
+}
+
+.card.maximized .field-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.card.maximized .field-item p {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.card.maximized .progress-field h3 {
+    font-size: 1.8rem;
+}
+
+.card.maximized .progress-field p {
+    font-size: 2.2rem;
+}
+
+.card.maximized .status-text {
+    font-size: 2rem;
 }
 
 .layout {

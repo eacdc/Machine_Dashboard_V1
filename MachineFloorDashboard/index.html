@@ -46,7 +46,7 @@
         <section id="dashboard" class="dashboard" hidden>
             <article class="card" id="machineCard">
                 <div class="card-header" id="machineHeader">
-                    <h2 id="machineName">Machine</h2>
+                    <h2 id="machineName" class="machine-name-centered">Machine</h2>
                     <button id="maximizeButton" class="maximize-button" title="Maximize">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
@@ -78,36 +78,43 @@
                 </div>
 
                 <div id="runningLayout" class="card-content layout" hidden>
-                    <div class="info-grid">
-                        <div>
+                    <div class="running-row row-1">
+                        <div class="field-item">
                             <h3>Job</h3>
                             <p id="currentJob"></p>
                         </div>
-                        <div>
+                    </div>
+                    <div class="running-row row-2">
+                        <div class="field-item">
                             <h3>Started at</h3>
                             <p id="startTime"></p>
                         </div>
-                        <div>
-                            <h3>Running for</h3>
-                            <p id="runningDuration"></p>
-                        </div>
-                        <div>
-                            <h3>Target finish in</h3>
-                            <p id="targetFinishIn"></p>
-                        </div>
-                        <div>
+                        <div class="field-item">
                             <h3>ETA</h3>
                             <p id="eta"></p>
                         </div>
-                        <div>
+                    </div>
+                    <div class="running-row row-3">
+                        <div class="field-item">
+                            <h3>Running for</h3>
+                            <p id="runningDuration"></p>
+                        </div>
+                        <div class="field-item">
+                            <h3>Target finish in</h3>
+                            <p id="targetFinishIn"></p>
+                        </div>
+                    </div>
+                    <div class="running-row row-4">
+                        <div class="field-item">
                             <h3>Status</h3>
                             <p id="runningStatusText" class="status-text"></p>
                         </div>
                     </div>
-                    <div class="progress">
-                        <h3>Progress</h3>
-                        <p class="progress-text" id="progressText"></p>
-                        <p class="muted" id="remainingText"></p>
+                    <div class="running-row row-5">
+                        <div class="field-item progress-field">
+                            <h3>Progress</h3>
+                            <p class="progress-text" id="progressText"></p>
+                        </div>
                     </div>
                 </div>
             </article>

@@ -259,10 +259,8 @@
 
         const producedDisplay = formatNumber(data.ProducedQty);
         const planDisplay = formatNumber(data.PlanQty);
-        const remainingDisplay = formatNumber(data.RemainingQty);
 
         selectors.progressText.textContent = `Produced ${producedDisplay} / ${planDisplay}`;
-        selectors.remainingText.textContent = `Remaining ${remainingDisplay}`;
     }
 
     function renderDashboard(data) {
@@ -404,7 +402,7 @@
 
     function startAutoRefresh() {
         stopAutoRefresh();
-        const seconds = Number(config.refreshIntervalSeconds) || 60;
+        const seconds = Number(config.refreshIntervalSeconds) || 300;
         
         // Check if we have a valid machine ID from input or state
         const inputMachineId = selectors.machineIdInput ? selectors.machineIdInput.value.trim() : '';
