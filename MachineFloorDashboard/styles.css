@@ -811,7 +811,7 @@ body:has(.card.maximized) {
 .machine-card-grid {
     position: relative;
     transition: transform 0.3s ease, z-index 0.3s ease;
-    padding: 1rem;
+    padding: 1.75rem;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -865,8 +865,8 @@ body:has(.machine-card-grid.card-maximized) {
 
 .machine-card-grid .card-header h2 {
     margin: 0;
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: 1.4rem;
+    font-weight: 700;
 }
 
 .machine-card-grid.card-maximized .card-header h2 {
@@ -875,10 +875,16 @@ body:has(.machine-card-grid.card-maximized) {
 
 .machine-card-grid .idle-layout-grid,
 .machine-card-grid .running-layout-grid {
-    font-size: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     flex: 1;
     overflow: auto;
-    gap: 0.5rem;
+}
+
+.machine-card-grid .idle-layout-grid {
+    gap: 2rem;
+    padding: 1.5rem 0;
 }
 
 .machine-card-grid.card-maximized .idle-layout-grid,
@@ -888,8 +894,14 @@ body:has(.machine-card-grid.card-maximized) {
 
 .machine-card-grid .idle-field-item h3,
 .machine-card-grid .field-item h3 {
-    font-size: 0.7rem;
-    margin: 0 0 0.25rem;
+    margin: 0 0 0.5rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.machine-card-grid .idle-field-item h3 {
+    font-size: 1rem;
 }
 
 .machine-card-grid.card-maximized .idle-field-item h3,
@@ -900,8 +912,13 @@ body:has(.machine-card-grid.card-maximized) {
 
 .machine-card-grid .idle-field-item p,
 .machine-card-grid .field-item p {
-    font-size: 0.85rem;
     margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.machine-card-grid .idle-field-item p {
+    font-size: 1.3rem;
 }
 
 .machine-card-grid.card-maximized .idle-field-item p,
@@ -910,12 +927,45 @@ body:has(.machine-card-grid.card-maximized) {
     font-weight: 700;
 }
 
-.machine-card-grid .idle-row.idle-row-1,
+.machine-card-grid .running-row {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.machine-card-grid .running-row.row-1 {
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
 .machine-card-grid .running-row.row-2,
 .machine-card-grid .running-row.row-3 {
-    gap: 0.5rem;
-    padding: 0;
-    margin-bottom: 0.5rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.machine-card-grid .running-row.row-4,
+.machine-card-grid .running-row.row-5 {
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+.machine-card-grid .idle-row {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.machine-card-grid .idle-row.idle-row-1 {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.machine-card-grid .idle-row.idle-row-2 {
+    grid-template-columns: 1fr;
+    justify-items: center;
 }
 
 .machine-card-grid.card-maximized .idle-row.idle-row-1,
@@ -927,6 +977,7 @@ body:has(.machine-card-grid.card-maximized) {
 
 .machine-card-grid .idle-field-item,
 .machine-card-grid .field-item {
+    text-align: center;
     min-width: unset;
 }
 
@@ -936,6 +987,7 @@ body:has(.machine-card-grid.card-maximized) {
 }
 
 .machine-card-grid .progress-field {
+    width: 100%;
     max-width: 100%;
 }
 
@@ -944,7 +996,11 @@ body:has(.machine-card-grid.card-maximized) {
 }
 
 .machine-card-grid .status-text {
-    font-size: 0.75rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .machine-card-grid.card-maximized .status-text {
@@ -952,47 +1008,42 @@ body:has(.machine-card-grid.card-maximized) {
 }
 
 .machine-card-grid .progress-text {
-    font-size: 0.8rem;
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
 .machine-card-grid.card-maximized .progress-text {
     font-size: 2.1rem;
 }
 
-.machine-card-grid .idle-row {
-    margin-bottom: 0.25rem;
-}
-
-.machine-card-grid .idle-row.idle-row-2 {
-    margin-bottom: 0.25rem;
-}
-
 .machine-card-grid .backlog {
-    margin-top: 0.25rem;
+    text-align: center;
     flex-shrink: 0;
 }
 
 .machine-card-grid .backlog h3 {
-    font-size: 0.7rem;
-    margin-bottom: 0.2rem;
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
 }
 
 .machine-card-grid .backlog ul {
-    gap: 0.2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
 }
 
 .machine-card-grid .backlog li {
-    font-size: 0.7rem;
-}
-
-.machine-card-grid .running-row {
-    margin-bottom: 0.25rem;
-}
-
-.machine-card-grid .running-row.row-1,
-.machine-card-grid .running-row.row-4,
-.machine-card-grid .running-row.row-5 {
-    margin-bottom: 0.25rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
 }
 
 .machine-card-grid .maximize-button {
