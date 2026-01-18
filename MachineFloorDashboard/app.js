@@ -444,8 +444,14 @@
         const runningLayout = cardElement.querySelector('.running-layout-grid');
 
         if (isRunning) {
-            if (idleLayout) idleLayout.hidden = true;
-            if (runningLayout) runningLayout.hidden = false;
+            if (idleLayout) {
+                idleLayout.hidden = true;
+                idleLayout.style.display = 'none';
+            }
+            if (runningLayout) {
+                runningLayout.hidden = false;
+                runningLayout.style.display = '';
+            }
 
             const isBehind = flagIsTrue(data.IsBehindSchedule);
             cardElement.dataset.state = 'running';
@@ -482,8 +488,14 @@
                 progressTextEl.textContent = `Produced ${producedDisplay} / ${planDisplay}`;
             }
         } else {
-            if (idleLayout) idleLayout.hidden = false;
-            if (runningLayout) runningLayout.hidden = true;
+            if (idleLayout) {
+                idleLayout.hidden = false;
+                idleLayout.style.display = '';
+            }
+            if (runningLayout) {
+                runningLayout.hidden = true;
+                runningLayout.style.display = 'none';
+            }
 
             cardElement.dataset.state = 'idle';
             cardElement.dataset.statusColor = 'red';

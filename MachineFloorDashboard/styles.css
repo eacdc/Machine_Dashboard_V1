@@ -882,6 +882,11 @@ body:has(.machine-card-grid.card-maximized) {
     overflow: auto;
 }
 
+.machine-card-grid .idle-layout-grid[hidden],
+.machine-card-grid .running-layout-grid[hidden] {
+    display: none !important;
+}
+
 .machine-card-grid .idle-layout-grid {
     gap: 2rem;
     padding: 1.5rem 0;
