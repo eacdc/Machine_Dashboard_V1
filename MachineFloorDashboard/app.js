@@ -597,9 +597,11 @@
 
         setStatusMessage('');
         
-        if (selectors.autoRefreshToggle.checked) {
-            startAllMachinesAutoRefresh();
+        // Always start auto-refresh in view all mode
+        if (!selectors.autoRefreshToggle.checked) {
+            selectors.autoRefreshToggle.checked = true;
         }
+        startAllMachinesAutoRefresh();
     }
 
     function startAllMachinesAutoRefresh() {
@@ -631,9 +633,17 @@
             if (selectors.viewAllButton) {
                 selectors.viewAllButton.textContent = 'View All';
             }
+            // Show header controls
+            if (selectors.appShell) {
+                selectors.appShell.classList.remove('view-all-mode');
+            }
         } else {
             // Switch to all machines view
             stopAutoRefresh();
+            // Hide header controls except View All button and auto-refresh
+            if (selectors.appShell) {
+                selectors.appShell.classList.add('view-all-mode');
+            }
             loadAllMachines();
             if (selectors.viewAllButton) {
                 selectors.viewAllButton.textContent = 'View Single';

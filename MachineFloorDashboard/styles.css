@@ -61,6 +61,13 @@ html:has(.card.maximized[data-status-color="green"]) {
     padding: 2.5rem 0 3rem;
 }
 
+.app-shell.view-all-mode {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+    gap: 0.5rem;
+}
+
 .app-header {
     display: flex;
     flex-wrap: wrap;
@@ -315,6 +322,28 @@ body:has(.card.maximized) {
 
 .app-shell.hide-header .app-header {
     display: none;
+}
+
+.app-shell.view-all-mode .header-controls > .machine-field,
+.app-shell.view-all-mode .header-controls > .field:not(.toggle),
+.app-shell.view-all-mode .header-controls > #refreshButton {
+    display: none;
+}
+
+.app-shell.view-all-mode .title-block {
+    display: none;
+}
+
+.app-shell.view-all-mode .app-header {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    min-height: auto;
+    flex-shrink: 0;
+}
+
+.app-shell.view-all-mode #statusMessage {
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
 }
 
 .card-header {
@@ -762,18 +791,30 @@ body:has(.card.maximized) {
 
 .all-machines-dashboard {
     width: 100%;
+    height: calc(100vh - 80px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .machines-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 0.75rem;
     padding: 0;
+    height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .machine-card-grid {
     position: relative;
     transition: transform 0.3s ease, z-index 0.3s ease;
+    padding: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .machine-card-grid.card-maximized {
@@ -813,7 +854,8 @@ body:has(.machine-card-grid.card-maximized) {
 
 .machine-card-grid .card-header {
     position: relative;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
 }
 
 .machine-card-grid.card-maximized .card-header {
@@ -823,7 +865,8 @@ body:has(.machine-card-grid.card-maximized) {
 
 .machine-card-grid .card-header h2 {
     margin: 0;
-    font-size: 1.2rem;
+    font-size: 0.95rem;
+    font-weight: 600;
 }
 
 .machine-card-grid.card-maximized .card-header h2 {
@@ -832,7 +875,10 @@ body:has(.machine-card-grid.card-maximized) {
 
 .machine-card-grid .idle-layout-grid,
 .machine-card-grid .running-layout-grid {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+    flex: 1;
+    overflow: auto;
+    gap: 0.5rem;
 }
 
 .machine-card-grid.card-maximized .idle-layout-grid,
@@ -842,7 +888,8 @@ body:has(.machine-card-grid.card-maximized) {
 
 .machine-card-grid .idle-field-item h3,
 .machine-card-grid .field-item h3 {
-    font-size: 0.85rem;
+    font-size: 0.7rem;
+    margin: 0 0 0.25rem;
 }
 
 .machine-card-grid.card-maximized .idle-field-item h3,
@@ -853,7 +900,8 @@ body:has(.machine-card-grid.card-maximized) {
 
 .machine-card-grid .idle-field-item p,
 .machine-card-grid .field-item p {
-    font-size: 1rem;
+    font-size: 0.85rem;
+    margin: 0;
 }
 
 .machine-card-grid.card-maximized .idle-field-item p,
@@ -865,8 +913,9 @@ body:has(.machine-card-grid.card-maximized) {
 .machine-card-grid .idle-row.idle-row-1,
 .machine-card-grid .running-row.row-2,
 .machine-card-grid .running-row.row-3 {
-    gap: 2rem;
-    padding: 0 1rem;
+    gap: 0.5rem;
+    padding: 0;
+    margin-bottom: 0.5rem;
 }
 
 .machine-card-grid.card-maximized .idle-row.idle-row-1,
@@ -878,7 +927,7 @@ body:has(.machine-card-grid.card-maximized) {
 
 .machine-card-grid .idle-field-item,
 .machine-card-grid .field-item {
-    min-width: 200px;
+    min-width: unset;
 }
 
 .machine-card-grid.card-maximized .idle-field-item,
@@ -895,7 +944,7 @@ body:has(.machine-card-grid.card-maximized) {
 }
 
 .machine-card-grid .status-text {
-    font-size: 0.95rem;
+    font-size: 0.75rem;
 }
 
 .machine-card-grid.card-maximized .status-text {
@@ -903,11 +952,79 @@ body:has(.machine-card-grid.card-maximized) {
 }
 
 .machine-card-grid .progress-text {
-    font-size: 1rem;
+    font-size: 0.8rem;
 }
 
 .machine-card-grid.card-maximized .progress-text {
     font-size: 2.1rem;
+}
+
+.machine-card-grid .idle-row {
+    margin-bottom: 0.25rem;
+}
+
+.machine-card-grid .idle-row.idle-row-2 {
+    margin-bottom: 0.25rem;
+}
+
+.machine-card-grid .backlog {
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+}
+
+.machine-card-grid .backlog h3 {
+    font-size: 0.7rem;
+    margin-bottom: 0.2rem;
+}
+
+.machine-card-grid .backlog ul {
+    gap: 0.2rem;
+}
+
+.machine-card-grid .backlog li {
+    font-size: 0.7rem;
+}
+
+.machine-card-grid .running-row {
+    margin-bottom: 0.25rem;
+}
+
+.machine-card-grid .running-row.row-1,
+.machine-card-grid .running-row.row-4,
+.machine-card-grid .running-row.row-5 {
+    margin-bottom: 0.25rem;
+}
+
+.machine-card-grid .maximize-button {
+    padding: 0.25rem;
+    width: 20px;
+    height: 20px;
+}
+
+.machine-card-grid .maximize-button svg {
+    width: 14px;
+    height: 14px;
+}
+
+@media (max-width: 1920px) {
+    .machines-grid {
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 1600px) {
+    .machines-grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 1400px) {
+    .machines-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
@@ -940,8 +1057,15 @@ body:has(.machine-card-grid.card-maximized) {
         width: 100%;
     }
 
+    .all-machines-dashboard {
+        height: calc(100vh - 100px);
+    }
+
     .machines-grid {
         grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 1rem;
+        overflow-y: auto;
     }
 
     .machine-card-grid .idle-row.idle-row-1,
