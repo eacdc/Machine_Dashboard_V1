@@ -49,7 +49,7 @@
     /** Fixed IDs for View All only (single view uses the API machine dropdown). */
     const VIEW_ALL_MACHINE_IDS = {
         KOL: [14, 47, 58, 61, 62, 63, 64, 65, 66, 33],
-        AHM: [1, 2, 3, 11, 12, 17],
+        AHM: [1, 2, 3, 11, 12, 17, 19],
     };
 
     const state = {
